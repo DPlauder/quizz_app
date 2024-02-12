@@ -1,0 +1,12 @@
+{
+  "question": [
+    {
+      "id": 1,
+      "text": "Wievle Beine hat eine Spinne?",
+      "answerTrue": 8,
+      "answerWrong1": 6,
+      "answerWrong2": 4,
+      "answerWrong3": 2
+    }
+  ]
+}
