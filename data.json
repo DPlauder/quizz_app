@@ -1,12 +1,28 @@
 {
-  "question": [
+  "questions": [
     {
-      "id": 1,
-      "text": "Wievle Beine hat eine Spinne?",
-      "answerTrue": 8,
-      "answerWrong1": 6,
-      "answerWrong2": 4,
-      "answerWrong3": 2
+      "id": "1",
+      "questionText": "Wievle Beine hat eine Spinne?",
+      "answerTrue": "8",
+      "answerWrong1": "6",
+      "answerWrong2": "4",
+      "answerWrong3": "2"
+    },
+    {
+      "id": "2",
+      "questionText": "Wie macht ein Hund?",
+      "answerTrue": "Wuff",
+      "answerWrong1": "Miau",
+      "answerWrong2": "Quak",
+      "answerWrong3": "Muh"
+    },
+    {
+      "id": 4156117.7088503577,
+      "questionText": "asd",
+      "answerTrue": "asd",
+      "answerWrong1": "asd",
+      "answerWrong2": "asd",
+      "answerWrong3": "asd"
     }
   ]
 }

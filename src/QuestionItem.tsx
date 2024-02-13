@@ -1,30 +1,36 @@
 import {
   Card,
   CardContent,
-  IconButton,
   Grid,
   Typography,
   Button,
+  Container,
 } from "@mui/material";
-import { IQuestion } from "./ts/interfaces/global_interfaces";
 
 interface Props {
-  question: IQuestion;
+  questionText: string;
+  answerTrue: string;
+  answerWrong1: string;
+  answerWrong2: string;
+  answerWrong3: string;
+
   //handleClick: (isRight: boolean) => void;
 }
 
-export default function QuestionItem({ question }: Props) {
+export default function QuestionItem(props: Props) {
   return (
-    <Grid item>
-      <Card>
-        <CardContent>
-          <Typography>{question.text}</Typography>
-          <Button>{question.answerWrong1}</Button>
-          <Button>{question.answerWrong2}</Button>
-          <Button>{question.answerTrue}</Button>
-          <Button>{question.answerWrong3}</Button>
-        </CardContent>
-      </Card>
-    </Grid>
+    <Container>
+      <Grid item>
+        <Card>
+          <CardContent>
+            <Typography>{props.questionText}</Typography>
+            <Button>{props.answerWrong1}</Button>
+            <Button>{props.answerWrong2}</Button>
+            <Button>{props.answerTrue}</Button>
+            <Button>{props.answerWrong3}</Button>
+          </CardContent>
+        </Card>
+      </Grid>
+    </Container>
   );
 }

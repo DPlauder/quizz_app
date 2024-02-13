@@ -22,5 +22,35 @@ export default function useQuestions() {
       }
     })();
   }, [setQuestion]);
-  return [questions];
+  async function handleAdd(question: IQuestion, isNew: boolean): Promise<void> {
+    let method = "POST";
+    let url = "/questions";
+    console.log(question);
+    if (!isNew) {
+      method = "PUT";
+      url += `/${question.id}`;
+    }
+    if (isNew) question.id = Math.random() * 9999999;
+    const options = {
+      method,
+      body: JSON.stringify(question),
+      headers: { "Content-Type": "application/json" },
+    };
+    const res = await fetch(url, options);
+    const data = await res.json();
+
+    if (!isNew) {
+      setQuestion((prevQuestion) =>
+        prevQuestion?.map((prevQuestion) => {
+          if (prevQuestion.id === question.id) {
+            return data;
+          }
+          return prevQuestion;
+        })
+      );
+    } else {
+      setQuestion((prevQuestion) => [...prevQuestion, data]);
+    }
+  }
+  return [questions, handleAdd];
 }

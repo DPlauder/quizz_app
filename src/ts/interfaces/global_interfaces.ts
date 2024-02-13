@@ -1,6 +1,6 @@
 export interface IQuestion {
   id: number;
-  text: string;
+  questionText: string;
   answerTrue: string;
   answerWrong1: string;
   answerWrong2: string;

@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       proxy: {
-        "/question": {
+        "/questions": {
           target: env.VITE_JSON_SERVER_URL,
           changeOrigin: true,
         },
