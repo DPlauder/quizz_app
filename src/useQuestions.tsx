@@ -30,7 +30,7 @@ export default function useQuestions() {
       method = "PUT";
       url += `/${question.id}`;
     }
-    if (isNew) question.id = Math.random() * 9999999;
+    if (isNew) question.id = Math.floor(Math.random() * 999999999).toString();
     const options = {
       method,
       body: JSON.stringify(question),
@@ -52,5 +52,18 @@ export default function useQuestions() {
       setQuestion((prevQuestion) => [...prevQuestion, data]);
     }
   }
-  return [questions, handleAdd];
+  async function handleDelete(question: IQuestion) {
+    const options = {
+      method: "DELETE",
+    };
+    const res = await fetch(`/questions/${question.id}`, options);
+    if (res.ok) {
+      setQuestion((prevQuestion) =>
+        prevQuestion.filter(
+          (prevQuestion) => prevQuestion.id !== prevQuestion.id
+        )
+      );
+    }
+  }
+  return [questions, handleAdd, handleDelete];
 }
