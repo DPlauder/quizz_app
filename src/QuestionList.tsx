@@ -1,11 +1,12 @@
 import useQuestions from "./useQuestions";
 import QuestionItem from "./QuestionItem";
-import { Grid, Fab, Container } from "@mui/material";
+import { Grid, Fab, Container, Button } from "@mui/material";
 import Add from "@mui/icons-material/Add";
 import { IQuestion } from "./ts/interfaces/global_interfaces";
 import FormEdit from "./FormEdit";
 import { useState } from "react";
 import DeleteDialog from "./DeleteDialog";
+import ResultDialog from "./ResultDialog";
 
 export default function QuestionList() {
   const [questions, handleAdd, handleDelete] = useQuestions();
@@ -20,6 +21,8 @@ export default function QuestionList() {
     open: boolean;
     question: IQuestion | null;
   }>({ open: false, question: null });
+  const [resultDialogOpen, setResultDialogOpen] = useState(false);
+  const [points, setPoints] = useState(0);
 
   const handleDialog = (open: boolean, question: IQuestion) => {
     if (open) {
@@ -36,6 +39,34 @@ export default function QuestionList() {
       setFormDialog({ open: false, question: undefined });
     }
   };
+  const [chosenAnswers, setChosenAnswers] = useState<IQuestion[]>([]);
+
+  const clickButtonHandler = (question: IQuestion) => {
+    const index = chosenAnswers.findIndex(
+      (answer) => question.id === answer.id
+    );
+    if (index !== -1) {
+      const copyAnswer = [...chosenAnswers];
+      copyAnswer[index].chosenAnswere = question.chosenAnswere;
+      setChosenAnswers(copyAnswer);
+    } else {
+      setChosenAnswers([...chosenAnswers, question]);
+    }
+  };
+
+  const handleCheckAnswers = () => {
+    let totalPoints = 0;
+
+    chosenAnswers.map((question) => {
+      if (question.answerTrue === question.chosenAnswere) {
+        totalPoints += 1;
+      }
+    });
+
+    setPoints(totalPoints);
+    setResultDialogOpen(true);
+  };
+
   return (
     <Container>
       <Grid container spacing={2}>
@@ -52,6 +83,7 @@ export default function QuestionList() {
               question={question}
               onDialog={handleDialog}
               onEdit={handleEditDialog}
+              onClicked={clickButtonHandler}
             />
           );
         })}
@@ -103,6 +135,24 @@ export default function QuestionList() {
       >
         <Add />
       </Fab>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleCheckAnswers}
+        sx={{
+          position: "fixed",
+          right: "50%",
+          bottom: "20%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        Check Answers
+      </Button>
+      <ResultDialog
+        open={resultDialogOpen}
+        points={points}
+        onClose={setResultDialogOpen}
+      />
     </Container>
   );
 }

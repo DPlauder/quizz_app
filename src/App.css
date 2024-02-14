@@ -1,0 +1,9 @@
+button.selected {
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+button.selected:hover {
+  color: black;
+}

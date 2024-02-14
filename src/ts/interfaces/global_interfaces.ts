@@ -5,4 +5,5 @@ export interface IQuestion {
   answerWrong1: string;
   answerWrong2: string;
   answerWrong3: string;
+  chosenAnswere: string;
 }
