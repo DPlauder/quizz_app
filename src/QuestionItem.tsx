@@ -19,6 +19,7 @@ interface Props {
   answerWrong3: string;
   question: IQuestion;
   onDialog: (open: boolean, question: IQuestion) => void;
+  onEdit: (open: boolean, question: IQuestion) => void;
 
   //handleClick: (isRight: boolean) => void;
 }
@@ -40,7 +41,6 @@ export default function QuestionItem(props: Props) {
             aria-label="delete-question"
             onClick={() => {
               props.onDialog(true, props.question);
-              console.log(props.question);
             }}
           >
             <DeleteIcon />
@@ -48,7 +48,7 @@ export default function QuestionItem(props: Props) {
           <IconButton
             color="primary"
             aria-label="edit-movie"
-            //onClick={() => onEdit(true, question)}
+            onClick={() => props.onEdit(true, props.question)}
           >
             <Edit />
           </IconButton>

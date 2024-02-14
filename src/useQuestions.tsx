@@ -22,13 +22,17 @@ export default function useQuestions() {
       }
     })();
   }, [setQuestion]);
-  async function handleAdd(question: IQuestion, isNew: boolean): Promise<void> {
+
+  async function handleAdd(
+    question: IQuestion,
+    isNew: boolean = false,
+    id?: string
+  ): Promise<void> {
     let method = "POST";
     let url = "/questions";
-    console.log(question);
     if (!isNew) {
       method = "PUT";
-      url += `/${question.id}`;
+      url += `/${id}`;
     }
     if (isNew) question.id = Math.floor(Math.random() * 999999999).toString();
     const options = {
@@ -42,7 +46,7 @@ export default function useQuestions() {
     if (!isNew) {
       setQuestion((prevQuestion) =>
         prevQuestion?.map((prevQuestion) => {
-          if (prevQuestion.id === question.id) {
+          if (prevQuestion.id === id) {
             return data;
           }
           return prevQuestion;
@@ -52,16 +56,16 @@ export default function useQuestions() {
       setQuestion((prevQuestion) => [...prevQuestion, data]);
     }
   }
+
   async function handleDelete(question: IQuestion) {
+    console.log("hello delete", question.id);
     const options = {
       method: "DELETE",
     };
     const res = await fetch(`/questions/${question.id}`, options);
     if (res.ok) {
       setQuestion((prevQuestion) =>
-        prevQuestion.filter(
-          (prevQuestion) => prevQuestion.id !== prevQuestion.id
-        )
+        prevQuestion.filter((prevQuestion) => prevQuestion.id != question.id)
       );
     }
   }

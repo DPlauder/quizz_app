@@ -29,7 +29,7 @@ export default function DeleteDialog({ open, title, text, onConfirm }: Props) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => onConfirm(true)} color="primary" autoFocus>
+        <Button onClick={() => onConfirm(true)} color="primary">
           Ok
         </Button>
         <Button onClick={() => onConfirm(false)} color="secondary">

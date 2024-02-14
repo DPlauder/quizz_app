@@ -13,7 +13,9 @@ export default function QuestionList() {
     open: boolean;
     question?: IQuestion;
     isNew?: boolean;
+    id?: string;
   }>({ open: false, isNew: true });
+
   const [deleteDialog, setDeleteDialog] = useState<{
     open: boolean;
     question: IQuestion | null;
@@ -24,6 +26,14 @@ export default function QuestionList() {
       setDeleteDialog({ open: true, question });
     } else {
       setDeleteDialog({ open: false, question: null });
+    }
+  };
+  const handleEditDialog = (open: boolean, question: IQuestion) => {
+    console.log("hello edit", question);
+    if (open) {
+      setFormDialog({ open: true, question, id: question.id });
+    } else {
+      setFormDialog({ open: false, question: undefined });
     }
   };
   return (
@@ -41,6 +51,7 @@ export default function QuestionList() {
               answerWrong3={question.answerWrong3}
               question={question}
               onDialog={handleDialog}
+              onEdit={handleEditDialog}
             />
           );
         })}
@@ -51,7 +62,7 @@ export default function QuestionList() {
         open={deleteDialog.open}
         onConfirm={(isComfirmed) => {
           if (isComfirmed && deleteDialog.question) {
-            (handleDelete as (movie: IQuestion) => Promise<void>)(
+            (handleDelete as (question: IQuestion) => Promise<void>)(
               deleteDialog.question
             );
           }
@@ -59,14 +70,22 @@ export default function QuestionList() {
         }}
       ></DeleteDialog>
       <FormEdit
-        open={formDialog.open}
         onSave={(question: IQuestion) => {
-          setFormDialog({ open: false, question: undefined, isNew: false });
-          (handleAdd as (question: IQuestion, isNew: boolean) => Promise<void>)(
-            question,
-            formDialog.isNew!
-          );
+          setFormDialog({
+            open: false,
+            question: undefined,
+            isNew: false,
+            id: question.id,
+          });
+          (
+            handleAdd as (
+              question: IQuestion,
+              isNew: boolean,
+              id: string
+            ) => Promise<void>
+          )(question, formDialog.isNew!, formDialog.id!);
         }}
+        open={formDialog.open}
         onClose={() => setFormDialog({ open: false, question: undefined })}
         question={formDialog.question}
       ></FormEdit>
