@@ -68,5 +68,5 @@ export default function useQuestions() {
       );
     }
   }
-  return [questions, handleAdd, handleDelete, err];
+  return [questions, handleAdd, handleDelete];
 }
