@@ -8,7 +8,7 @@ import DeleteDialog from "./DeleteDialog";
 import ResultDialog from "./ResultDialog";
 
 export default function QuestionList() {
-  const [questions, handleAdd, handleDelete] = useQuestions();
+  const [questions, err, handleAdd, handleDelete] = useQuestions();
   const [formDialog, setFormDialog] = useState<{
     open: boolean;
     question?: IQuestion;
@@ -65,7 +65,7 @@ export default function QuestionList() {
     setPoints(totalPoints);
     setResultDialogOpen(true);
   };
-
+  console.log(err);
   return (
     <Container sx={{ display: "flex", flexDirection: "column" }}>
       <Grid container spacing={2}>
@@ -149,7 +149,7 @@ export default function QuestionList() {
         open={resultDialogOpen}
         points={points}
         onClose={setResultDialogOpen}
-        maxPoints={questions.length}
+        maxPoints={(questions! as IQuestion[]).length}
       />
     </Container>
   );
