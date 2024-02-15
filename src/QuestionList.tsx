@@ -39,25 +39,25 @@ export default function QuestionList() {
       setFormDialog({ open: false, question: undefined });
     }
   };
-  const [chosenAnswers, setChosenAnswers] = useState<IQuestion[]>([]);
 
   const clickButtonHandler = (question: IQuestion) => {
-    const index = chosenAnswers.findIndex(
+    const index = (questions as IQuestion[]).findIndex(
       (answer) => question.id === answer.id
     );
-    if (index !== -1) {
-      const copyAnswer = [...chosenAnswers];
-      copyAnswer[index].chosenAnswere = question.chosenAnswere;
-      setChosenAnswers(copyAnswer);
-    } else {
-      setChosenAnswers([...chosenAnswers, question]);
-    }
+    const copyQuestion = [...(questions as IQuestion[])];
+    copyQuestion[index].chosenAnswere = question.chosenAnswere;
+    (
+      handleAdd as (
+        question: IQuestion,
+        isNew: boolean,
+        id: string
+      ) => Promise<void>
+    )(question, false, question.id);
   };
 
   const handleCheckAnswers = () => {
     let totalPoints = 0;
-
-    chosenAnswers.map((question) => {
+    (questions as IQuestion[]).map((question) => {
       if (question.answerTrue === question.chosenAnswere) {
         totalPoints += 1;
       }
@@ -68,7 +68,7 @@ export default function QuestionList() {
   };
 
   return (
-    <Container>
+    <Container sx={{ display: "flex", flexDirection: "column" }}>
       <Grid container spacing={2}>
         {" "}
         {(questions as IQuestion[]).map((question: IQuestion): JSX.Element => {
@@ -121,30 +121,28 @@ export default function QuestionList() {
         onClose={() => setFormDialog({ open: false, question: undefined })}
         question={formDialog.question}
       ></FormEdit>
-      <Fab
+      <Button
+        variant="contained"
         color="primary"
         onClick={() => {
           setFormDialog({ open: true, question: undefined, isNew: true });
         }}
         sx={{
+          height: "auto",
+          width: "200px",
           position: "fixed",
-          right: "50%",
-          bottom: "10%",
-          transform: "translateX(-50%)",
+          top: "95%",
+          left: "43.5%",
         }}
       >
-        <Add />
-      </Fab>
+        Add new Question
+      </Button>
       <Button
+        className="resultBtn"
         variant="contained"
         color="primary"
         onClick={handleCheckAnswers}
-        sx={{
-          position: "fixed",
-          right: "50%",
-          bottom: "20%",
-          transform: "translateX(-50%)",
-        }}
+        sx={{ position: "fixed", top: "90%", left: "45%" }}
       >
         Check Answers
       </Button>
@@ -152,6 +150,7 @@ export default function QuestionList() {
         open={resultDialogOpen}
         points={points}
         onClose={setResultDialogOpen}
+        maxPoints={questions.length}
       />
     </Container>
   );

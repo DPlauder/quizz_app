@@ -39,68 +39,74 @@ export default function QuestionItem(props: Props) {
     }
   };
   return (
-    <Container>
+    <Container sx={{ width: "30%", margin: "1.5%" }}>
       <Grid item>
         <Card>
-          <CardContent>
-            <Typography>{props.questionText}</Typography>
-            <Button
-              className={selectedButton.id === 1 ? "selected" : ""}
-              onClick={() => {
-                handleButtonClick(1);
-                props.question.chosenAnswere = props.answerWrong1;
-                props.onClicked(props.question);
-              }}
-            >
-              {props.answerWrong1}
-            </Button>
-            <Button
-              className={selectedButton.id === 2 ? "selected" : ""}
-              onClick={() => {
-                handleButtonClick(2);
-                props.question.chosenAnswere = props.answerWrong2;
-                props.onClicked(props.question);
-              }}
-            >
-              {props.answerWrong2}
-            </Button>
-            <Button
-              className={selectedButton.id === 3 ? "selected" : ""}
-              onClick={() => {
-                handleButtonClick(3);
-                props.question.chosenAnswere = props.answerTrue;
-                props.onClicked(props.question);
-              }}
-            >
-              {props.answerTrue}
-            </Button>
-            <Button
-              className={selectedButton.id === 4 ? "selected" : ""}
-              onClick={() => {
-                handleButtonClick(4);
-                props.question.chosenAnswere = props.answerWrong3;
-                props.onClicked(props.question);
-              }}
-            >
-              {props.answerWrong3}
-            </Button>
+          <CardContent sx={{ padding: "10px, 5px" }}>
+            <Typography sx={{ textAlign: "center" }}>
+              {props.questionText}
+            </Typography>
+            <Container sx={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                className={selectedButton.id === 1 ? "selected" : ""}
+                onClick={() => {
+                  handleButtonClick(1);
+                  props.question.chosenAnswere = props.answerWrong1;
+                  props.onClicked(props.question);
+                }}
+              >
+                {props.answerWrong1}
+              </Button>
+              <Button
+                className={selectedButton.id === 2 ? "selected" : ""}
+                onClick={() => {
+                  handleButtonClick(2);
+                  props.question.chosenAnswere = props.answerWrong2;
+                  props.onClicked(props.question);
+                }}
+              >
+                {props.answerWrong2}
+              </Button>
+              <Button
+                className={selectedButton.id === 3 ? "selected" : ""}
+                onClick={() => {
+                  handleButtonClick(3);
+                  props.question.chosenAnswere = props.answerTrue;
+                  props.onClicked(props.question);
+                }}
+              >
+                {props.answerTrue}
+              </Button>
+              <Button
+                className={selectedButton.id === 4 ? "selected" : ""}
+                onClick={() => {
+                  handleButtonClick(4);
+                  props.question.chosenAnswere = props.answerWrong3;
+                  props.onClicked(props.question);
+                }}
+              >
+                {props.answerWrong3}
+              </Button>
+            </Container>
           </CardContent>
-          <IconButton
-            color="primary"
-            aria-label="delete-question"
-            onClick={() => {
-              props.onDialog(true, props.question);
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-          <IconButton
-            color="primary"
-            aria-label="edit-movie"
-            onClick={() => props.onEdit(true, props.question)}
-          >
-            <Edit />
-          </IconButton>
+          <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <IconButton
+              color="primary"
+              aria-label="delete-question"
+              onClick={() => {
+                props.onDialog(true, props.question);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+              color="primary"
+              aria-label="edit-movie"
+              onClick={() => props.onEdit(true, props.question)}
+            >
+              <Edit />
+            </IconButton>
+          </Container>
         </Card>
       </Grid>
     </Container>

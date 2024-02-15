@@ -7,3 +7,6 @@ button.selected {
 button.selected:hover {
   color: black;
 }
+h2 {
+  text-align: center;
+}

@@ -58,7 +58,6 @@ export default function useQuestions() {
   }
 
   async function handleDelete(question: IQuestion) {
-    console.log("hello delete", question.id);
     const options = {
       method: "DELETE",
     };

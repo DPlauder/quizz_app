@@ -6,15 +6,35 @@
       "answerTrue": "Wuff",
       "answerWrong1": "Miau",
       "answerWrong2": "Quak",
-      "answerWrong3": "Oink"
+      "answerWrong3": "Quak",
+      "chosenAnswere": "Miau"
     },
     {
-      "questionText": "Wie macht die Katze",
+      "questionText": "Wie machen Katzen",
       "answerTrue": "Miau",
       "answerWrong1": "Wuff",
       "answerWrong2": "Oink",
       "answerWrong3": "Muh",
-      "id": "932101921"
+      "id": "932101921",
+      "chosenAnswere": "Miau"
+    },
+    {
+      "id": "678285049",
+      "questionText": "Wie macht ein Schwein",
+      "answerTrue": "Oink",
+      "answerWrong1": "Miau",
+      "answerWrong2": "Wuff",
+      "answerWrong3": "Quak",
+      "chosenAnswere": "Wuff"
+    },
+    {
+      "id": "476640044",
+      "questionText": "Wie macht eine Kuh",
+      "answerTrue": "Muh",
+      "answerWrong1": "Miau",
+      "answerWrong2": "Wuff",
+      "answerWrong3": "Quak",
+      "chosenAnswere": "Wuff"
     }
   ]
 }
