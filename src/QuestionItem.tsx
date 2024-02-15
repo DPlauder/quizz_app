@@ -46,7 +46,13 @@ export default function QuestionItem(props: Props) {
             <Typography sx={{ textAlign: "center" }}>
               {props.questionText}
             </Typography>
-            <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <Container
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
               <Button
                 className={selectedButton.id === 1 ? "selected" : ""}
                 onClick={() => {
